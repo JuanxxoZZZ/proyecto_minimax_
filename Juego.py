@@ -17,8 +17,8 @@ while fila_gato != fila_raton or col_gato != col_raton:
     tablero = [['.', '.', '.', '.', '.', '.'] for _ in range(6)]
 
     #Lo que simplemente hace esto es ubicar el emoji en el tablero y le asignamos la fila y la columna para ver en todo momento  
-    tablero[fila_gato][col_gato] = "🐱"
-    tablero[fila_raton][col_raton] = "🐁"
+    tablero[fila_gato][col_gato] = "G"
+    tablero[fila_raton][col_raton] = "R"
 
     #Esto lo que hace es, como nosotros le dimos una lista de obstaculos con filas y columnas
     #lo que hace es poner visualmente los obstaculos 
@@ -46,6 +46,12 @@ while fila_gato != fila_raton or col_gato != col_raton:
     else:
         print("El movimiento no es valido")
         continue
+
+    '''Que la fila nueva sea mayor o igual a 0 Y menor que 6 (porque tu tablero tiene 6 filas: 0, 1, 2, 3, 4, 5)
+       Que la columna nueva sea mayor o igual a 0 Y menor que 6'''
+    if fila_nueva >= 5:
+    elif:
+        col_nueva >= 5
+        
         #Lo que tendria que hacer este if, seria calcular basicamente si la posicion del gato
         #este dentro del tablero para poder asi moverse chill de cojones 
-    if movimiento_valido:
