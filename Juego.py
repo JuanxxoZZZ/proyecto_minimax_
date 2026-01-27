@@ -1,9 +1,14 @@
-#Lo que hice aca fue darle una posicion al gato y al raton a la vez 
+import random
+
+#Lo que hice aca fue darle una posicion al gato y al raton a la vez, tambien añadir lo que serian los turnos del gato y el "limite"
 fila_gato = 0
 col_gato = 0
 
 fila_raton = 5
 col_raton = 5
+
+turnos_gato = 0 
+limite_de_turnos = 5
 
 #esto seria basicamente una lista de los obstaculos que hay en el mapa 
 lista_de_obstaculos = [(2, 2), (3, 3), (2, 3), (5, 3)]
@@ -17,13 +22,13 @@ while fila_gato != fila_raton or col_gato != col_raton:
     tablero = [['.', '.', '.', '.', '.', '.'] for _ in range(6)]
 
     #Lo que simplemente hace esto es ubicar el emoji en el tablero y le asignamos la fila y la columna para ver en todo momento  
-    tablero[fila_gato][col_gato] = "G"
-    tablero[fila_raton][col_raton] = "R"
+    tablero[fila_gato][col_gato] = "🐱"
+    tablero[fila_raton][col_raton] = "🐭"
 
     #Esto lo que hace es, como nosotros le dimos una lista de obstaculos con filas y columnas
     #lo que hace es poner visualmente los obstaculos 
     for (fila, col) in lista_de_obstaculos:
-        tablero[fila][col] = '🟫'
+        tablero[fila][col] = '◾'
 
     #esto es simple y llanamente para quitar las comillas del tablero 
     for fila in tablero:
@@ -47,11 +52,28 @@ while fila_gato != fila_raton or col_gato != col_raton:
         print("El movimiento no es valido")
         continue
 
-    '''Que la fila nueva sea mayor o igual a 0 Y menor que 6 (porque tu tablero tiene 6 filas: 0, 1, 2, 3, 4, 5)
-       Que la columna nueva sea mayor o igual a 0 Y menor que 6'''
-    if fila_nueva >= 5:
-    elif:
-        col_nueva >= 5
-        
         #Lo que tendria que hacer este if, seria calcular basicamente si la posicion del gato
-        #este dentro del tablero para poder asi moverse chill de cojones 
+        #este dentro del tablero para poder asi moverse chill de cojones
+         
+    '''Que la fila nueva sea mayor o igual a 0 Y menor que 5 (porque tu tablero tiene 5 filas: 0, 1, 2, 3, 4, 5)
+       Que la columna nueva sea mayor o igual a 0 Y menor que 5'''
+
+    if 0 <= fila_nueva <= 5 and 0 <= col_nueva <= 5:
+
+        #Esto hace que el gato respete los obstaculos y le alerta de paso si puede pasar o no   
+     if (fila_nueva, col_nueva) not in lista_de_obstaculos:
+        fila_gato = fila_nueva
+        col_gato = col_nueva
+     else:
+        print("Estas chocando un obstaculo")
+
+    #Esto basicamente serian los turnos del gato, y si llega a su limite, el raton gana y le ponemos break para que no siga infinitamente
+     turnos_gato = turnos_gato + 1
+    if turnos_gato == limite_de_turnos:
+        print("El raton gano")
+        break
+    #Lo que hace este if es, calcular si el gato esta encima del raton y avisa si gana el gato y le ponemos break para que no siga infinitamente
+    if (fila_nueva, col_nueva) == (fila_raton, col_raton):
+        print("Gano el mishi")
+        break
+
