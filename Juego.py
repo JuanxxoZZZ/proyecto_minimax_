@@ -21,14 +21,17 @@ def distancia_GyR (fila_gato, col_gato, fila_raton, col_raton):
 def movimientos_validos(fila, col):
     direcciones_validas = [(-1, 0), (1, 0), (0, 1), (0, -1)]
     movimientos_a_hacer= []
+    distancia_encontrada = 0 
+    mejor_movimiento = 0 
 
-    #
     for (movi_fila, movi_col) in direcciones_validas:
         nueva_fila = fila + movi_fila
         nueva_col = col + movi_col
         if 0 <= nueva_fila <= 5 and 0 <= nueva_col <= 5:
             if (nueva_fila, nueva_col) not in lista_de_obstaculos:
+                movimientos_a_hacer.append((nueva_fila, nueva_col))
                 
+
                 '''Hacer un ciclo while en donde calcule la posicion del gato y del raton para saber si el gato 
 atrapo al raton, mostrar el tablero, a los personajes, darles movimientos 
 y que funcione los obstaculos'''
