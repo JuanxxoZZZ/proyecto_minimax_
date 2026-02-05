@@ -1,5 +1,3 @@
-import random
-
 #Lo que hice aca fue darle una posicion al gato y al raton a la vez, tambien añadir lo que serian los turnos del gato y el "limite"
 fila_gato = 0
 col_gato = 0
@@ -21,8 +19,6 @@ def distancia_GyR (fila_gato, col_gato, fila_raton, col_raton):
 def movimientos_validos(fila, col):
     direcciones_validas = [(-1, 0), (1, 0), (0, 1), (0, -1)]
     movimientos_a_hacer= []
-    distancia_encontrada = 0 
-    mejor_movimiento = 0 
 
     for (movi_fila, movi_col) in direcciones_validas:
         nueva_fila = fila + movi_fila
@@ -97,30 +93,16 @@ while fila_gato != fila_raton or col_gato != col_raton:
     if (fila_nueva, col_nueva) == (fila_raton, col_raton):
         print("Gano el mishi")
         break
-    #esto seria los movimientos que haria el raton 
-    direcciones_raton = ("arriba", "abajo", "izquierda", "derecha")
 
-    #aca hacemos que la libreria random decida aleatoriamente en que direccion se va a mover el raton 
-    movimientos_raton = random.choice(direcciones_raton)
+    raton_movimientos = movimientos_validos(fila_raton, col_raton)
+    distancia_GyR2 = distancia_GyR(fila_gato, col_gato, fila_raton, col_raton)
+    mejor_movimiento = []
+    mejor_distancia = 0 
 
-    fila_nuevarat = fila_raton
-    col_nuevarat = col_raton
-
-    if movimientos_raton == "arriba":
-        fila_nuevarat -= 1 
-    elif movimientos_raton == "abajo":
-        fila_nuevarat += 1
-    elif movimientos_raton == "izquierda":
-        col_nuevarat -= 1 
-    elif movimientos_raton == "derecha":
-        col_nuevarat += 1 
+    for (nueva_fila, nueva_col) in raton_movimientos:
+        if distancia_GyR2 == mejor_distancia:
+            
 
         """lo quee faltaria seria hacer que el raton se mueva y que respete todo como el gato"""
         """Básicamente lo que tendría que hacer con la librería random seria, crear una variable que en esa variable guarde los movimientos posibles 
          que va a hacer el ratón, luego hacemos que random.choice() elija los movimientos, luego "configuramos" los movimientos de arriba, abajo, etc etc"""    
-
-    if 0 <= fila_nuevarat <= 5 and 0 <= col_nuevarat <= 5:
-
-            if (fila_nuevarat, col_nuevarat) not in lista_de_obstaculos:
-                fila_raton = fila_nuevarat
-                col_raton = col_nuevarat
