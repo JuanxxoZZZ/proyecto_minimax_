@@ -8,14 +8,16 @@ col_raton = 5
 turnos_gato = 0 
 limite_de_turnos = 20
 
-
 #esto seria basicamente una lista de los obstaculos que hay en el mapa 
 lista_de_obstaculos = [(2, 2), (3, 3), (2, 3), (5, 3)]
 
+"""Esto basciamente seria a lo que llamamos Distancia manhhattan, es calcular las dos posiciones de los jugadores
+para luego calcular el mejor camino"""
 def distancia_GyR (fila_gato, col_gato, fila_raton, col_raton):
     return abs(fila_gato - fila_raton) + abs(col_gato - col_raton)
 
-
+"""Esto seria una funcion para el raton, que lo que haria es ver si el raton primeramente no sobrepasa los obstaculos 
+y que respete los obstaculos sino le devuelve en la misma posicion en la qeu estaba"""
 def movimientos_validos(fila, col):
     direcciones_validas = [(-1, 0), (1, 0), (0, 1), (0, -1)]
     movimientos_a_hacer= []
@@ -27,14 +29,15 @@ def movimientos_validos(fila, col):
             if (nueva_fila, nueva_col) not in lista_de_obstaculos:
                 movimientos_a_hacer.append((nueva_fila, nueva_col))
                 
-
-                '''Hacer un ciclo while en donde calcule la posicion del gato y del raton para saber si el gato 
-atrapo al raton, mostrar el tablero, a los personajes, darles movimientos 
-y que funcione los obstaculos'''
+    return movimientos_a_hacer
+    
+    '''Hacer un ciclo while en donde calcule la posicion del gato y del raton para saber si el gato 
+    atrapo al raton, mostrar el tablero, a los personajes, darles movimientos 
+    y que funcione los obstaculos'''
 
 while fila_gato != fila_raton or col_gato != col_raton:
 
-       #Hacer un tablero sencillo con solo puntitos
+       #Es un tablero sencillo con una lista dentro de otra lista
     tablero = [['.', '.', '.', '.', '.', '.'] for _ in range(6)]
 
     #Lo que simplemente hace esto es ubicar el emoji en el tablero y le asignamos la fila y la columna para ver en todo momento  
@@ -49,7 +52,7 @@ while fila_gato != fila_raton or col_gato != col_raton:
     #esto es simple y llanamente para quitar las comillas del tablero 
     for fila in tablero:
         print(' '.join(fila))
-
+ 
     #con esto le pedimos al usuario que ingrese el movimiento del gato
     tecla = input("Ingrese el movimiento: ").lower()
 
@@ -89,20 +92,23 @@ while fila_gato != fila_raton or col_gato != col_raton:
     if turnos_gato == limite_de_turnos:
         print("El raton gano")
         break
+
     #Lo que hace este if es, calcular si el gato esta encima del raton y avisa si gana el gato y le ponemos break para que no siga infinitamente
     if (fila_nueva, col_nueva) == (fila_raton, col_raton):
         print("Gano el mishi")
         break
 
     raton_movimientos = movimientos_validos(fila_raton, col_raton)
-    distancia_GyR2 = distancia_GyR(fila_gato, col_gato, fila_raton, col_raton)
     mejor_movimiento = []
     mejor_distancia = 0 
 
     for (nueva_fila, nueva_col) in raton_movimientos:
-        if distancia_GyR2 == mejor_distancia:
-            
+        distancia_actual = distancia_GyR(fila_gato, col_gato, nueva_fila, nueva_col)
+        if distancia_actual > mejor_distancia:
+            mejor_distancia = distancia_actual
+            mejor_movimiento = [nueva_fila, nueva_col]
 
-        """lo quee faltaria seria hacer que el raton se mueva y que respete todo como el gato"""
+    
+            """lo quee faltaria seria hacer que el raton se mueva y que respete todo como el gato"""
         """Básicamente lo que tendría que hacer con la librería random seria, crear una variable que en esa variable guarde los movimientos posibles 
-         que va a hacer el ratón, luego hacemos que random.choice() elija los movimientos, luego "configuramos" los movimientos de arriba, abajo, etc etc"""    
+         que va a hacer el ratón, luego hacemos que random.choice() elija los movimientos, luego "configuramos" los movimientos de arriba, abajo, etc etc"""
