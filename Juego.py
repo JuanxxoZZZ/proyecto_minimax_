@@ -17,7 +17,7 @@ def distancia_GyR (fila_gato, col_gato, fila_raton, col_raton):
     return abs(fila_gato - fila_raton) + abs(col_gato - col_raton)
 
 """Esto seria una funcion para el raton, que lo que haria es ver si el raton primeramente no sobrepasa los obstaculos 
-y que respete los obstaculos sino le devuelve en la misma posicion en la qeu estaba"""
+y que respete los obstaculos sino le devuelve en la misma posicion en la que estaba"""
 def movimientos_validos(fila, col):
     direcciones_validas = [(-1, 0), (1, 0), (0, 1), (0, -1)]
     movimientos_a_hacer = []
@@ -111,17 +111,19 @@ while fila_gato != fila_raton or col_gato != col_raton:
 
         #Esto basicamente serian los turno del gato, y si llega a su limite, el raton gana y le ponemos break para que no siga infinitamente
     turnos_gato = turnos_gato + 1
-    
-    if turnos_gato == limite_de_turnos:
-        print("El raton gano")
-        break
-
+   
     #Lo que hace este aif es, calcular si el gato esta encima del raton y avisa si gana el gato y le ponemos break para que no siga infinitamente
     if (fila_gato, col_gato) == (fila_raton, col_raton):
         print("Gano el mishi")
         break
+    
+    if turnos_gato >= limite_de_turnos:
+        print("El raton gano")
+        break
+
 
     raton_movimientos = movimientos_validos(fila_raton, col_raton)
+    
     mejor_movimiento = None
     mejor_distancia = -999
 
