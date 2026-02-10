@@ -109,15 +109,15 @@ while fila_gato != fila_raton or col_gato != col_raton:
      else:
         print("Estas chocando un obstaculo")
 
-    #Esto basicamente serian los turno del gato, y si llega a su limite, el raton gana y le ponemos break para que no siga infinitamente
-     turnos_gato = turnos_gato + 1
-
+        #Esto basicamente serian los turno del gato, y si llega a su limite, el raton gana y le ponemos break para que no siga infinitamente
+        turnos_gato = turnos_gato + 1
+    
     if turnos_gato == limite_de_turnos:
         print("El raton gano")
         break
 
     #Lo que hace este aif es, calcular si el gato esta encima del raton y avisa si gana el gato y le ponemos break para que no siga infinitamente
-    if (fila_nueva, col_nueva) == (fila_raton, col_raton):
+    if (fila_gato, col_gato) == (fila_raton, col_raton):
         print("Gano el mishi")
         break
 
@@ -126,13 +126,13 @@ while fila_gato != fila_raton or col_gato != col_raton:
     mejor_distancia = 0 
 
     for (nueva_fila, nueva_col) in raton_movimientos:
-        valor = minimax(fila_gato, col_gato, nueva_fila, nueva_col, "gato", 2)
+        valor = minimax(fila_gato, col_gato, nueva_fila, nueva_col, "gato", 3)
         if valor > mejor_distancia:
             mejor_distancia = valor
             mejor_movimiento = [nueva_fila, nueva_col]
-    fila_raton = nueva_fila
-    col_raton = nueva_col 
-     
+    fila_raton = mejor_movimiento[0]
+    col_raton = mejor_movimiento[1]
+
 """lo quee faltaria seria hacer que el raton se mueva y que respete todo como el gato"""
 """Básicamente lo que tendría que hacer con la librería random seria, crear una variable que en esa variable guarde los movimientos posibles 
  que va a hacer el ratón, luego hacemos que random.choice() elija los movimientos, luego "configuramos" los movimientos de arriba, abajo, etc etc"""
