@@ -103,11 +103,11 @@ while fila_gato != fila_raton or col_gato != col_raton:
     if 0 <= fila_nueva <= 5 and 0 <= col_nueva <= 5:
 
         #Esto hace que el gato respete los obstaculos y le alerta de paso si puede pasar o no   
-     if (fila_nueva, col_nueva) not in lista_de_obstaculos:
-        fila_gato = fila_nueva
-        col_gato = col_nueva
-     else:
-        print("Estas chocando un obstaculo")
+        if (fila_nueva, col_nueva) not in lista_de_obstaculos:
+            fila_gato = fila_nueva
+            col_gato = col_nueva
+        else:
+            print("Estas chocando un obstaculo")
 
         #Esto basicamente serian los turno del gato, y si llega a su limite, el raton gana y le ponemos break para que no siga infinitamente
     turnos_gato = turnos_gato + 1
@@ -122,16 +122,18 @@ while fila_gato != fila_raton or col_gato != col_raton:
         break
 
     raton_movimientos = movimientos_validos(fila_raton, col_raton)
-    mejor_movimiento = []
-    mejor_distancia = 0 
+    mejor_movimiento = None
+    mejor_distancia = -999
 
     for (nueva_fila, nueva_col) in raton_movimientos:
         valor = minimax(fila_gato, col_gato, nueva_fila, nueva_col, "gato", 3)
         if valor > mejor_distancia:
             mejor_distancia = valor
             mejor_movimiento = [nueva_fila, nueva_col]
-    fila_raton = mejor_movimiento[0]
-    col_raton = mejor_movimiento[1]
+    
+    if mejor_movimiento:
+        fila_raton = mejor_movimiento[0]
+        col_raton = mejor_movimiento[1]
 
 """lo quee faltaria seria hacer que el raton se mueva y que respete todo como el gato"""
 """Básicamente lo que tendría que hacer con la librería random seria, crear una variable que en esa variable guarde los movimientos posibles 
