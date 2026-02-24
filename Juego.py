@@ -25,14 +25,17 @@ def movimientos_validos(fila, col):
     for (movi_fila, movi_col) in direcciones_validas:
         nueva_fila = fila + movi_fila
         nueva_col = col + movi_col
+
+        #movimientos validos del raton  
         if 0 <= nueva_fila <= 5 and 0 <= nueva_col <= 5:
+            
             if (nueva_fila, nueva_col) not in lista_de_obstaculos:
                 movimientos_a_hacer.append((nueva_fila, nueva_col))
                 
     return movimientos_a_hacer
-
-# 
+ 
 def minimax(fila_catmini, col_catmini, fila_ratmini, col_ratmini, turno, profundidad):
+    #caso base, ya no genera futuros movimientos 
     if profundidad == 0:
         return distancia_manhattan (fila_catmini, col_catmini, fila_ratmini, col_ratmini)
     
@@ -40,7 +43,7 @@ def minimax(fila_catmini, col_catmini, fila_ratmini, col_ratmini, turno, profund
     if turno == "raton":
         mejor_valor = -999
         movimientos_raton = movimientos_validos(fila_ratmini, col_ratmini)
-        #este for 
+        #este for lo que hace es 
         for (nueva_fila, nueva_col) in movimientos_raton:
             valor = minimax(fila_catmini, col_catmini, nueva_fila, nueva_col, "gato", profundidad - 1)
             if valor > mejor_valor:
@@ -56,7 +59,7 @@ def minimax(fila_catmini, col_catmini, fila_ratmini, col_ratmini, turno, profund
                 mejor_valor = valor
         return mejor_valor
     
-'''Hacer un ciclo while en donde cNalcule la posicion del gato y del raton para saber si el gato 
+'''Hacer un ciclo while en donde calcule la posicion del gato y del raton para saber si el gato 
     atrapo al raton, mostrar el tablero, a los personajes, darles movimientos 
     y que funcione los obstaculos'''
 
@@ -115,6 +118,7 @@ while fila_gato != fila_raton or col_gato != col_raton:
 
     mejor_movimiento = None
     mejor_distancia = -999
+    #lo que haria basicamente este for seria  
 
     for (nueva_fila, nueva_col) in raton_movimientos:
         valor = minimax(fila_gato, col_gato, nueva_fila, nueva_col, "gato", 3)
